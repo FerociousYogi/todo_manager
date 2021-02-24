@@ -6,8 +6,12 @@ class TodosController < ApplicationController
 
   def show
     id = params[:id]
-    todo = Todo.find(id)
-    render plain: todo.to_pleasant_string
+    begin
+      todo = Todo.find(id)
+      render plain: todo.to_pleasant_string
+    rescue
+      render plain: "ID not found."
+    end
   end
 
   def create
